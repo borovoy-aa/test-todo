@@ -1,6 +1,6 @@
 #main {
     margin-top: 50px;
-    width: 300px;
+    width: 500px;
     height: auto;
     padding: 10px;
     border: 3px solid black
@@ -10,7 +10,13 @@
     border: 1px solid #000;
     margin: 20px;
     padding: 3px;
+    min-height: 50px;
+    position: relative;
     list-style-type: none;
     display: flex;
     justify-content: space-between;
+}
+
+.list-p {
+    width: 100%;
 }
