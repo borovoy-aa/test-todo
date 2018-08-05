@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="add-task">Add task</button>
-    <input type="text" id="new-task" required>
+    <form >
+        <input type="submit" id="add-task" value="Add task"></input>
+        <input type="text" id="new-task" required>
+        <input type="date" name="date" id="date">
+        <label for="anyDate">Date</label>
+    </form>
     <ul id="main"></ul>
     <script src="app.js"></script>
 </body>

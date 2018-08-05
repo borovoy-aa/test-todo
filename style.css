@@ -1,6 +1,6 @@
 #main {
     margin-top: 50px;
-    width: 500px;
+    width: 800px;
     height: auto;
     padding: 10px;
     border: 3px solid black
@@ -15,8 +15,20 @@
     list-style-type: none;
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
 }
 
 .list-p {
     width: 100%;
+}
+
+.editInput {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.date-p {
+    min-width: 100px;
 }
