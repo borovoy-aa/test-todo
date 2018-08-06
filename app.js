@@ -4,8 +4,8 @@ const mainWrap = document.getElementById('main');
 const listItem = document.getElementsByClassName('list');
 const inputDate = document.getElementById('date');
 
-const clear = () => {
-	newTask.value = "";
+const clear = anyInput => {
+	anyInput.value = "";
 }
 
 const nTask = (e) => {
@@ -13,14 +13,16 @@ const nTask = (e) => {
 	
 	const li = document.createElement('li');
 	li.classList.add('list')
-	
+
+	const btnsDiv = document.createElement('div');
+	btnsDiv.classList.add('btnsDiv');
+
+
 	const removeBtn = document.createElement('button');
 	removeBtn.classList.add('removeBtn');
-	removeBtn.innerText = 'Remove Task';
 
 	const editBtn = document.createElement('button');
 	editBtn.classList.add('editBtn');
-	editBtn.innerText = 'Edit Task';
 
 	const okBtn = document.createElement('button');
 	okBtn.classList.add('okBtn');
@@ -42,9 +44,10 @@ const nTask = (e) => {
 	}
 	
 	p.innerHTML = taskValue;
-	li.appendChild(removeBtn);
-	li.appendChild(editBtn);
+	btnsDiv.appendChild(removeBtn);
+	btnsDiv.appendChild(editBtn);
 	li.insertBefore(checkBtn, li.children[0]);
+	li.appendChild(btnsDiv);
 
 	checkBtn.addEventListener( 'change', function() {
     if(this.checked) {
@@ -60,7 +63,8 @@ const nTask = (e) => {
 		mainWrap.appendChild(li);
 	}
 	
-	clear();
+	clear(newTask);
+	clear(inputDate);
 	
 	removeBtn.addEventListener('click', function(e) {
 		mainWrap.removeChild(li);
@@ -69,10 +73,10 @@ const nTask = (e) => {
 	const editP = function (e) {
 		console.log(this)
 		p.innerText = editInput.value;
-		li.insertBefore(p, removeBtn);
+		li.insertBefore(p, li.children[1]);
 		editInput.parentNode.removeChild(editInput);
 		this.parentNode.removeChild(this);
-		li.appendChild(editBtn);
+		btnsDiv.appendChild(editBtn);
 	}
 	
 	const editInput = document.createElement('input');
@@ -80,11 +84,11 @@ const nTask = (e) => {
 
 	editBtn.addEventListener('click', function() {
 		li.removeChild(p);
-		li.insertBefore(editInput, removeBtn);
+		li.insertBefore(editInput, li.children[1]);
 		editInput.value = p.textContent;
 		editInput.focus();
-		li.removeChild(editBtn);
-		li.appendChild(okBtn);
+		btnsDiv.removeChild(editBtn);
+		btnsDiv.appendChild(okBtn);
 		okBtn.addEventListener('click', editP, false);
 	}, false)
 

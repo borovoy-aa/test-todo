@@ -6,6 +6,77 @@
     border: 3px solid black
 }
 
+.add-task {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 2px solid black;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    margin: 0 auto;
+    transition: .5s;
+}
+.add-task:hover {
+    border-color: seagreen;
+}
+
+.add-task:hover .add-task__icon {
+    color: seagreen;
+}
+
+.add-task__icon {
+    font-size: 18px;
+    transition: .5s;
+}
+
+.new-task {
+    margin-left: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid black;
+}
+
+.date {
+    margin-left: 75px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid black;
+}
+
+.editBtn {
+    margin: 10px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 2px solid black;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    transition: .5s;
+}
+
+.removeBtn {
+    margin: 10px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 2px solid black;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    transition: .5s;
+}
+
+
 .list {
     border: 1px solid #000;
     margin: 20px;
@@ -31,4 +102,11 @@
 
 .date-p {
     min-width: 100px;
+}
+
+.btnsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }

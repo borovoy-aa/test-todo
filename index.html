@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <form >
-        <input type="submit" id="add-task" value="Add task"></input>
-        <input type="text" id="new-task" required>
-        <input type="date" name="date" id="date">
+        <button class="add-task" type="submit" id="add-task" value=" ">
+            <i class="add-task__icon fas fa-plus"></i>
+        </button>
+        <input class="new-task" type="text" id="new-task" required>
+        <input class="date" type="date" name="date" id="date">
         <label for="anyDate">Date</label>
     </form>
     <ul id="main"></ul>
