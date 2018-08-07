@@ -3,12 +3,15 @@ const newTask = document.getElementById('new-task');
 const mainWrap = document.getElementById('main');
 const listItem = document.getElementsByClassName('list');
 const inputDate = document.getElementById('date');
+const mainSelect = document.getElementById("mainSelect");
+
 
 const clear = anyInput => {
 	anyInput.value = "";
 }
 
 const nTask = (e) => {
+
 	const taskValue = newTask.value;
 	
 	const li = document.createElement('li');
@@ -20,17 +23,36 @@ const nTask = (e) => {
 
 	const removeBtn = document.createElement('button');
 	removeBtn.classList.add('removeBtn');
+	removeBtn.classList.add('circleBtn');
 
 	const editBtn = document.createElement('button');
 	editBtn.classList.add('editBtn');
+	editBtn.classList.add('circleBtn');
 
 	const okBtn = document.createElement('button');
 	okBtn.classList.add('okBtn');
-	okBtn.innerText = 'Okay';
+	okBtn.classList.add('circleBtn');
+
+	const okIcon = document.createElement('i');
+	okIcon.classList.add( "circle-icon", "far", "fa-check-square" );
+	okBtn.appendChild(okIcon);
+
+	const editIcon = document.createElement('i');
+	editIcon.classList.add( "circle-icon", "fas", "fa-pen" );
+	editBtn.appendChild(editIcon);
+
+	const removeIcon = document.createElement('i');
+	removeIcon.classList.add( "circle-icon", "far", "fa-trash-alt" );
+	removeBtn.appendChild(removeIcon);
 
 	const checkBtn = document.createElement('input')
 	checkBtn.type = "checkbox";
+	checkBtn.id = 'checkbox'
 	checkBtn.classList.add('checkBtn');
+
+	const checkLabel = document.createElement('label');
+	checkLabel.setAttribute('for', 'checkbox');
+	
 
 	var p = document.createElement('p');
 	p.classList.add('list-p');
@@ -40,13 +62,14 @@ const nTask = (e) => {
 		var dateP = document.createElement('p');
 		dateP.classList.add('date-p');
 		dateP.innerText = inputDate.value
-		li.insertBefore(dateP, li.children[0]);
+		li.insertBefore(dateP, li.children[2]);
 	}
 	
 	p.innerHTML = taskValue;
 	btnsDiv.appendChild(removeBtn);
 	btnsDiv.appendChild(editBtn);
 	li.insertBefore(checkBtn, li.children[0]);
+	li.insertBefore(checkLabel, li.children[1]);
 	li.appendChild(btnsDiv);
 
 	checkBtn.addEventListener( 'change', function() {
@@ -91,6 +114,31 @@ const nTask = (e) => {
 		btnsDiv.appendChild(okBtn);
 		okBtn.addEventListener('click', editP, false);
 	}, false)
+
+	const optionValue = mainSelect.options[mainSelect.selectedIndex].value;
+
+	let listArray = [...listItem]
+	const priorColor = color => {
+		listArray.forEach(el => {
+			return el.style.boxShadow = "inset 25px 0px 5px 0px " + color;
+		});
+		// for(let i = 0; i < listItem.length; i++) {
+		// 	listItem[i].style.boxShadow = "inset 25px 0px 5px 0px " + color;
+		// }
+	}
+
+  if(optionValue == 'low') {
+		priorColor('green');
+	}
+	else if(optionValue == 'middle') {
+		priorColor('orange');
+	}
+	else if(optionValue == 'high') {
+		priorColor('red');
+	}
+	else {
+		return false;
+	}
 
 	okBtn.removeEventListener('click', editP, false);
 	e.preventDefault();
