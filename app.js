@@ -21,17 +21,18 @@ const nTask = (e) => {
 	}
 	
 	const li = document.createElement('li');
+
 	if(optionValue == 'low') {
-		priorColor('green');
 		const li = document.createElement('li');
+		priorColor('green');
 	}
 	else if(optionValue == 'middle') {
-		priorColor('orange');
 		const li = document.createElement('li');
+		priorColor('orange');
 	}
 	else if(optionValue == 'high') {
-		priorColor('red');
 		const li = document.createElement('li');
+		priorColor('red');
 	}
 	else if(optionValue == 'no') {
 		const li = document.createElement('li');
@@ -86,8 +87,9 @@ const nTask = (e) => {
 	}
 	
 	p.innerHTML = taskValue;
-	btnsDiv.appendChild(removeBtn);
+	
 	btnsDiv.appendChild(editBtn);
+	btnsDiv.insertBefore(removeBtn, btnsDiv.children[1]);
 	li.insertBefore(checkBtn, li.children[0]);
 	li.insertBefore(checkLabel, li.children[1]);
 	li.appendChild(btnsDiv);
@@ -119,7 +121,7 @@ const nTask = (e) => {
 		li.insertBefore(p, li.children[1]);
 		editInput.parentNode.removeChild(editInput);
 		this.parentNode.removeChild(this);
-		btnsDiv.appendChild(editBtn);
+		btnsDiv.insertBefore(editBtn, btnsDiv.children[0]);
 	}
 	
 	const editInput = document.createElement('input');
@@ -131,7 +133,7 @@ const nTask = (e) => {
 		editInput.value = p.textContent;
 		editInput.focus();
 		btnsDiv.removeChild(editBtn);
-		btnsDiv.appendChild(okBtn);
+		btnsDiv.insertBefore(okBtn, btnsDiv.children[0]);
 		okBtn.addEventListener('click', editP, false);
 	}, false)
 
