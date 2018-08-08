@@ -66,6 +66,7 @@
     border-radius: 5px;
     margin: 20px;
     padding: 3px;
+    padding-left: 15px;
     min-height: 50px;
     position: relative;
     list-style-type: none;
@@ -78,6 +79,14 @@
 .list-p {
     width: 100%;
     font-size: 18px;
+}
+
+.priorSelect {
+    border: 2px solid black;
+    background: none;
+    border-radius: 5px;
+    margin-left: 20px;
+    padding: 5px;
 }
 
 .editInput {

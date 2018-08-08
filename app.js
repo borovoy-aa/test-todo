@@ -13,13 +13,34 @@ const clear = anyInput => {
 const nTask = (e) => {
 
 	const taskValue = newTask.value;
+
+	const optionValue = mainSelect.options[mainSelect.selectedIndex].value;
+
+	const priorColor = color => {
+		li.style.boxShadow = "inset 10px 0px 0px 0px " + color;
+	}
 	
 	const li = document.createElement('li');
+	if(optionValue == 'low') {
+		priorColor('green');
+		const li = document.createElement('li');
+	}
+	else if(optionValue == 'middle') {
+		priorColor('orange');
+		const li = document.createElement('li');
+	}
+	else if(optionValue == 'high') {
+		priorColor('red');
+		const li = document.createElement('li');
+	}
+	else if(optionValue == 'no') {
+		const li = document.createElement('li');
+	}
+
 	li.classList.add('list')
 
 	const btnsDiv = document.createElement('div');
 	btnsDiv.classList.add('btnsDiv');
-
 
 	const removeBtn = document.createElement('button');
 	removeBtn.classList.add('removeBtn');
@@ -53,7 +74,6 @@ const nTask = (e) => {
 	const checkLabel = document.createElement('label');
 	checkLabel.setAttribute('for', 'checkbox');
 	
-
 	var p = document.createElement('p');
 	p.classList.add('list-p');
 	li.appendChild(p);
@@ -114,31 +134,6 @@ const nTask = (e) => {
 		btnsDiv.appendChild(okBtn);
 		okBtn.addEventListener('click', editP, false);
 	}, false)
-
-	const optionValue = mainSelect.options[mainSelect.selectedIndex].value;
-
-	let listArray = [...listItem]
-	const priorColor = color => {
-		listArray.forEach(el => {
-			return el.style.boxShadow = "inset 25px 0px 5px 0px " + color;
-		});
-		// for(let i = 0; i < listItem.length; i++) {
-		// 	listItem[i].style.boxShadow = "inset 25px 0px 5px 0px " + color;
-		// }
-	}
-
-  if(optionValue == 'low') {
-		priorColor('green');
-	}
-	else if(optionValue == 'middle') {
-		priorColor('orange');
-	}
-	else if(optionValue == 'high') {
-		priorColor('red');
-	}
-	else {
-		return false;
-	}
 
 	okBtn.removeEventListener('click', editP, false);
 	e.preventDefault();

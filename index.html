@@ -14,12 +14,14 @@
             <i class="add-task__icon fas fa-plus"></i>
         </button>
         <input class="new-task" type="text" id="new-task" required>
-        <select id="mainSelect">
-            <option value="no" >Нет</option>
-            <option value="low" >Низкий</option>
-            <option value="middle" >Обычный</option>
-            <option value="high" >Высокий</option>
+        
+        <select class="priorSelect" id="mainSelect">
+            <option value="no" >No</option>
+            <option value="low" >Low</option>
+            <option value="middle" >Middle</option>
+            <option value="high" >High</option>
         </select>
+        <label for="mainSelect">Priority</label>
         <input class="date" type="date" name="date" id="date">
         <label for="anyDate">Date</label>
     </form>
