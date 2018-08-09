@@ -141,12 +141,24 @@ const nTask = (e) => {
 
 	const listArray = [...listItem];
 
-	localStorage.setItem("list", JSON.stringify(listArray));
-	const storageList = JSON.parse(localStorage.getItem("list"));
+	let localList = [
+		{checkbox: checkBtn.checked, p: p.innerHTML, optionVal: optionValue}
+	];
 
-	console.log(storageList)
+	console.log(localList)
+
+	for(let i = 0; i < listArray.length; i++) {
+		localList[i] = [
+			{checkbox: checkBtn.checked, p: p.innerHTML, optionVal: optionValue}
+		];
+	}
+
+	localStorage.setItem("list", JSON.stringify(localList));
+	const storageList = JSON.parse(localStorage.getItem("list"));
 	
+	console.log(storageList)
 	e.preventDefault();
+
 }
 
 
