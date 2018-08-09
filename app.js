@@ -138,8 +138,18 @@ const nTask = (e) => {
 	}, false)
 
 	okBtn.removeEventListener('click', editP, false);
+
+	const listArray = [...listItem];
+
+	localStorage.setItem("list", JSON.stringify(listArray));
+	const storageList = JSON.parse(localStorage.getItem("list"));
+
+	console.log(storageList)
+	
 	e.preventDefault();
 }
+
+
 
 btnTask.addEventListener('click', nTask, false);
 
