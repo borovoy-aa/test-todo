@@ -1,4 +1,4 @@
-#main {
+#todos {
     margin-top: 50px;
     width: 800px;
     height: auto;
@@ -117,4 +117,8 @@
     outline: none;
     border: none;
     border-bottom: 1px solid gray;
+}
+
+span {
+    width: 100%;
 }

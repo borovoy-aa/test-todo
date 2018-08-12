@@ -1,167 +1,214 @@
-const btnTask = document.getElementById('add-task');
-const newTask = document.getElementById('new-task');
-const mainWrap = document.getElementById('main');
-const listItem = document.getElementsByClassName('list');
-const inputDate = document.getElementById('date');
+const addInput = document.getElementById('addTodo');
+const addButton = document.getElementById('addTodoBtn');
+const todoList = document.getElementById('todos');
 const mainSelect = document.getElementById("mainSelect");
+const inputDate = document.getElementById('date');
 
+const getListItems = () => document.querySelectorAll('#todos > li')
 
-const clear = anyInput => {
-	anyInput.value = "";
+const todoTitle = text => {
+  const title = document.createElement('span')
+  title.innerText = text
+  
+  return title
 }
 
-const nTask = (e) => {
+const todoInput = () => {
+	const editInput = document.createElement('input')
+	editInput.classList.add('editInput')
 
-	const taskValue = newTask.value;
+	return editInput
+}
 
-	const optionValue = mainSelect.options[mainSelect.selectedIndex].value;
+const dateP = () => {
+	const dateP = document.createElement('p');
+	dateP.classList.add('date-p');
+	dateP.innerText = inputDate.value;
 
-	const priorColor = color => {
-		li.style.boxShadow = "inset 10px 0px 0px 0px " + color;
+	return dateP;
+}
+
+const setColor = (color, el) => {
+	el.style.boxShadow = "inset 10px 0px 0px 0px " + color;
+}
+
+const todoWrapper = () => {
+	const wrapper = document.createElement('li');
+	wrapper.classList.add('list')
+
+  return wrapper
+}
+
+const todoCheckbox = checked => {
+  const checkbox = document.createElement('input')
+  checkbox.type = 'checkbox'
+  checkbox.checked = checked
+  
+  checkbox.addEventListener('click', () => {
+    saveData()
+  })
+  
+  return checkbox
+}
+
+const todoItem = ({ text, checked, color }) => {
+  const wrapper = todoWrapper();
+  const checkbox = todoCheckbox(checked);
+	const title = todoTitle(text);
+	const edInput = todoInput();
+	const btnDiv = buttonsDiv();
+	const setDate = dateP();
+
+	const remBtn = rBtn();
+	const edBtn = eBtn();
+	const okBtn = oBtn();
+
+  wrapper.appendChild(checkbox)
+	wrapper.appendChild(title)
+	wrapper.appendChild(setDate)
+	wrapper.appendChild(btnDiv)
+
+	btnDiv.appendChild(remBtn);
+	btnDiv.appendChild(edBtn);
+	
+	remBtn.addEventListener('click', () => {
+		todoList.removeChild(wrapper);
+	});
+
+	edBtn.addEventListener('click', () => {
+		edInput.value = title.innerHTML
+		wrapper.removeChild(title);
+		wrapper.insertBefore(edInput, wrapper.children[1]);
+		edInput.focus();
+		btnDiv.removeChild(edBtn);
+		btnDiv.appendChild(okBtn);
+	});
+
+	okBtn.addEventListener('click', () => {
+		title.innerHTML = edInput.value
+		wrapper.removeChild(edInput);
+		wrapper.insertBefore(title, wrapper.children[1]);
+		btnDiv.removeChild(okBtn);
+		btnDiv.appendChild(edBtn);
+	})
+
+	const valueColor = {
+		no:() => {
+			return wrapper;
+		},
+		low:() => {
+			setColor('green', wrapper);
+		},
+		middle:() => {
+			setColor('orange', wrapper);
+		},
+		high:() => {
+			setColor('red', wrapper);
+		}
 	}
 	
-	const li = document.createElement('li');
+	valueColor[color]();
 
-	if(optionValue == 'low') {
-		const li = document.createElement('li');
-		priorColor('green');
-	}
-	else if(optionValue == 'middle') {
-		const li = document.createElement('li');
-		priorColor('orange');
-	}
-	else if(optionValue == 'high') {
-		const li = document.createElement('li');
-		priorColor('red');
-	}
-	else if(optionValue == 'no') {
-		const li = document.createElement('li');
-	}
+	wrapper.dataset.priority = color
 
-	li.classList.add('list')
+  return wrapper
+}
 
+const addTodo = data => {
+  const todo = todoItem(data)
+  todoList.appendChild(todo)
+}
+
+const buttonsDiv = () => {
 	const btnsDiv = document.createElement('div');
 	btnsDiv.classList.add('btnsDiv');
+	
+	return btnsDiv;
+}
 
+const rBtn = () => {
 	const removeBtn = document.createElement('button');
 	removeBtn.classList.add('removeBtn');
 	removeBtn.classList.add('circleBtn');
-
-	const editBtn = document.createElement('button');
-	editBtn.classList.add('editBtn');
-	editBtn.classList.add('circleBtn');
-
-	const okBtn = document.createElement('button');
-	okBtn.classList.add('okBtn');
-	okBtn.classList.add('circleBtn');
-
-	const okIcon = document.createElement('i');
-	okIcon.classList.add( "circle-icon", "far", "fa-check-square" );
-	okBtn.appendChild(okIcon);
-
-	const editIcon = document.createElement('i');
-	editIcon.classList.add( "circle-icon", "fas", "fa-pen" );
-	editBtn.appendChild(editIcon);
+	removeBtn.id = 'removeBtn'
 
 	const removeIcon = document.createElement('i');
 	removeIcon.classList.add( "circle-icon", "far", "fa-trash-alt" );
 	removeBtn.appendChild(removeIcon);
 
-	const checkBtn = document.createElement('input')
-	checkBtn.type = "checkbox";
-	checkBtn.id = 'checkbox'
-	checkBtn.classList.add('checkBtn');
-
-	const checkLabel = document.createElement('label');
-	checkLabel.setAttribute('for', 'checkbox');
-	
-	var p = document.createElement('p');
-	p.classList.add('list-p');
-	li.appendChild(p);
-
-	if (inputDate.value !== '') {
-		var dateP = document.createElement('p');
-		dateP.classList.add('date-p');
-		dateP.innerText = inputDate.value
-		li.insertBefore(dateP, li.children[2]);
-	}
-	
-	p.innerHTML = taskValue;
-	
-	btnsDiv.appendChild(editBtn);
-	btnsDiv.insertBefore(removeBtn, btnsDiv.children[1]);
-	li.insertBefore(checkBtn, li.children[0]);
-	li.insertBefore(checkLabel, li.children[1]);
-	li.appendChild(btnsDiv);
-
-	checkBtn.addEventListener( 'change', function() {
-    if(this.checked) {
-			p.style.textDecoration = "line-through";
-			p.style.color = "green"
-    } else {
-			p.style.textDecoration = "none";
-			p.style.color = "black"
-    }
-	});
-	
-	if (taskValue.trim()) {
-		mainWrap.appendChild(li);
-	}
-	
-	clear(newTask);
-	clear(inputDate);
-	
-	removeBtn.addEventListener('click', function(e) {
-		mainWrap.removeChild(li);
-	});
-
-	const editP = function (e) {
-		console.log(this)
-		p.innerText = editInput.value;
-		li.insertBefore(p, li.children[1]);
-		editInput.parentNode.removeChild(editInput);
-		this.parentNode.removeChild(this);
-		btnsDiv.insertBefore(editBtn, btnsDiv.children[0]);
-	}
-	
-	const editInput = document.createElement('input');
-	editInput.classList.add('editInput');
-
-	editBtn.addEventListener('click', function() {
-		li.removeChild(p);
-		li.insertBefore(editInput, li.children[1]);
-		editInput.value = p.textContent;
-		editInput.focus();
-		btnsDiv.removeChild(editBtn);
-		btnsDiv.insertBefore(okBtn, btnsDiv.children[0]);
-		okBtn.addEventListener('click', editP, false);
-	}, false)
-
-	okBtn.removeEventListener('click', editP, false);
-
-	const listArray = [...listItem];
-
-	let localList = [
-		{checkbox: checkBtn.checked, p: p.innerHTML, optionVal: optionValue}
-	];
-
-	console.log(localList)
-
-	for(let i = 0; i < listArray.length; i++) {
-		localList[i] = [
-			{checkbox: checkBtn.checked, p: p.innerHTML, optionVal: optionValue}
-		];
-	}
-
-	localStorage.setItem("list", JSON.stringify(localList));
-	const storageList = JSON.parse(localStorage.getItem("list"));
-	
-	console.log(storageList)
-	e.preventDefault();
-
+	return removeBtn
 }
 
+const eBtn = () => {
+	const editBtn = document.createElement('button');
+	editBtn.classList.add('editBtn');
+	editBtn.classList.add('circleBtn');
+	editBtn.id = 'editBtn';
 
+	const editIcon = document.createElement('i');
+	editIcon.classList.add( "circle-icon", "fas", "fa-pen" );
+	editBtn.appendChild(editIcon);
 
-btnTask.addEventListener('click', nTask, false);
+	return editBtn;
+}
 
+const oBtn = () => {
+	const okBtn = document.createElement('button');
+	okBtn.classList.add('okBtn');
+	okBtn.classList.add('circleBtn');
+	okBtn.id = 'okBtn';
+
+	const okIcon = document.createElement('i');
+	okIcon.classList.add( "circle-icon", "far", "fa-check-square" );
+	okBtn.appendChild(okIcon);
+
+	return okBtn;
+}
+
+const clear = anyInput => {
+	anyInput.value = "";
+}
+
+const parseListItem = item => {
+  const text = item.querySelector('span')
+	const checkbox = item.querySelector('input[type="checkbox"]')
+
+  return {
+    text: text.innerText,
+		checked: checkbox.checked,
+		color: item.dataset.priority
+	}
+}
+
+const parseList = list => {
+  return list.map(parseListItem)
+}
+
+const saveData = () => {
+  const data = parseList([ ...getListItems() ])
+  localStorage.setItem('todos', JSON.stringify(data))
+}
+
+const loadData = () => {
+  const data = localStorage.todos
+  
+  if (data) {
+    const parsedData = JSON.parse(data)
+    parsedData.forEach(addTodo)
+  }
+}
+
+addButton.addEventListener('click', () => {
+
+  const data = {
+    text: addInput.value,
+		checked: false,
+		color: mainSelect.options[mainSelect.selectedIndex].value
+  }
+
+  addTodo(data)
+	saveData()
+	clear(addInput)
+})
+
+loadData()
