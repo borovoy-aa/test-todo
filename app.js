@@ -72,6 +72,10 @@ const todoItem = ({ text, checked, color }) => {
 	btnDiv.appendChild(edBtn);
 	
 	remBtn.addEventListener('click', () => {
+			let key = localStorage.key('todo');
+			let value = localStorage.getItem(key);
+			console.log(value);
+		
 		todoList.removeChild(wrapper);
 	});
 
