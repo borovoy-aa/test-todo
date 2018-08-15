@@ -20,10 +20,10 @@ const todoInput = () => {
 	return editInput
 }
 
-const dateP = () => {
+const dateP = date => {
 	const dateP = document.createElement('p');
 	dateP.classList.add('date-p');
-	dateP.innerText = inputDate.value;
+	dateP.innerText = date.value;
 
 	return dateP;
 }
@@ -51,13 +51,13 @@ const todoCheckbox = checked => {
   return checkbox
 }
 
-const todoItem = ({ text, checked, color }) => {
+const todoItem = ({ text, checked, color, date }) => {
   const wrapper = todoWrapper();
   const checkbox = todoCheckbox(checked);
 	const title = todoTitle(text);
 	const edInput = todoInput();
 	const btnDiv = buttonsDiv();
-	const setDate = dateP();
+	const setDate = dateP(date);
 
 	const remBtn = rBtn();
 	const edBtn = eBtn();
@@ -72,11 +72,9 @@ const todoItem = ({ text, checked, color }) => {
 	btnDiv.appendChild(edBtn);
 	
 	remBtn.addEventListener('click', () => {
-			let key = localStorage.key('todo');
-			let value = localStorage.getItem(key);
-			console.log(value);
-		
+		localStorage.removeItem("todo")
 		todoList.removeChild(wrapper);
+		saveData()
 	});
 
 	edBtn.addEventListener('click', () => {
@@ -176,11 +174,13 @@ const clear = anyInput => {
 const parseListItem = item => {
   const text = item.querySelector('span')
 	const checkbox = item.querySelector('input[type="checkbox"]')
+	const dateInput = item.querySelector('input[type="date"]')
 
   return {
     text: text.innerText,
 		checked: checkbox.checked,
-		color: item.dataset.priority
+		color: item.dataset.priority,
+		date: dateInput.value
 	}
 }
 
@@ -207,7 +207,8 @@ addButton.addEventListener('click', () => {
   const data = {
     text: addInput.value,
 		checked: false,
-		color: mainSelect.options[mainSelect.selectedIndex].value
+		color: mainSelect.options[mainSelect.selectedIndex].value,
+		date: inputDate.value
   }
 
   addTodo(data)
