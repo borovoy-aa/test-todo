@@ -23,7 +23,7 @@ const todoInput = () => {
 const dateP = date => {
 	const dateP = document.createElement('p');
 	dateP.classList.add('date-p');
-	dateP.innerText = date.value;
+	dateP.innerText = date;
 
 	return dateP;
 }
@@ -174,13 +174,13 @@ const clear = anyInput => {
 const parseListItem = item => {
   const text = item.querySelector('span')
 	const checkbox = item.querySelector('input[type="checkbox"]')
-	const dateInput = item.querySelector('input[type="date"]')
+	const dateText = item.querySelector('p.date-p')
 
   return {
     text: text.innerText,
 		checked: checkbox.checked,
 		color: item.dataset.priority,
-		date: dateInput.value
+		date: dateText.innerText
 	}
 }
 
