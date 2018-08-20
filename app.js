@@ -3,11 +3,14 @@ const addButton = document.getElementById('addTodoBtn');
 const todoList = document.getElementById('todos');
 const mainSelect = document.getElementById("mainSelect");
 const inputDate = document.getElementById('date');
+const nowDate = document.getElementById('nowDate')
+
 
 const getListItems = () => document.querySelectorAll('#todos > li')
 
 const todoTitle = text => {
-  const title = document.createElement('span')
+	const title = document.createElement('span')
+	title.classList.add("inner-text")
   title.innerText = text
   
   return title
@@ -36,23 +39,42 @@ const todoWrapper = () => {
 	const wrapper = document.createElement('li');
 	wrapper.classList.add('list')
 
+	function styleVisibility() {
+		wrapper.style.opacity = "1"
+	}
+	
+	setTimeout(styleVisibility, 1);
+
   return wrapper
 }
 
 const todoCheckbox = checked => {
-  const checkbox = document.createElement('input')
+	const checkbox = document.createElement('input')
   checkbox.type = 'checkbox'
-  checkbox.checked = checked
+	checkbox.checked = checked
   
   checkbox.addEventListener('click', () => {
-    saveData()
+
+		saveData()
+
   })
   
   return checkbox
 }
 
+const todoCheckLabel = () => {
+	const checkLabel = document.createElement('label')
+	const checkSpan = document.createElement('span')
+	checkLabel.classList.add('check-container')
+	checkSpan.classList.add('checkmark')
+	checkLabel.appendChild(checkSpan)
+
+	return checkLabel
+}
+
 const todoItem = ({ text, checked, color, date }) => {
-  const wrapper = todoWrapper();
+	const wrapper = todoWrapper();
+	const labelContainer = todoCheckLabel();
   const checkbox = todoCheckbox(checked);
 	const title = todoTitle(text);
 	const edInput = todoInput();
@@ -63,7 +85,8 @@ const todoItem = ({ text, checked, color, date }) => {
 	const edBtn = eBtn();
 	const okBtn = oBtn();
 
-  wrapper.appendChild(checkbox)
+	wrapper.appendChild(labelContainer)
+  labelContainer.insertBefore(checkbox, labelContainer.children[0]);
 	wrapper.appendChild(title)
 	wrapper.appendChild(setDate)
 	wrapper.appendChild(btnDiv)
@@ -94,18 +117,36 @@ const todoItem = ({ text, checked, color, date }) => {
 		btnDiv.appendChild(edBtn);
 	})
 
+	const textStyle = () => {
+		if(checkbox.checked) {
+			title.style.textDecoration = "line-through"
+			title.style.fontStyle = "italic"
+			title.style.color = "#adb5bd"
+		} else {
+			title.style.textDecoration = "none"
+			title.style.fontStyle = "normal"
+			title.style.color = "#343a40"
+		}
+	}
+
+	checkbox.addEventListener('click', () => {
+		textStyle()
+	})
+
+	textStyle()
+
 	const valueColor = {
 		no:() => {
 			return wrapper;
 		},
 		low:() => {
-			setColor('green', wrapper);
+			setColor('#40c057', wrapper);
 		},
 		middle:() => {
-			setColor('orange', wrapper);
+			setColor('#fd7e14', wrapper);
 		},
 		high:() => {
-			setColor('red', wrapper);
+			setColor('#fa5252', wrapper);
 		}
 	}
 	
@@ -131,7 +172,7 @@ const buttonsDiv = () => {
 const rBtn = () => {
 	const removeBtn = document.createElement('button');
 	removeBtn.classList.add('removeBtn');
-	removeBtn.classList.add('circleBtn');
+	removeBtn.classList.add('square-btn');
 	removeBtn.id = 'removeBtn'
 
 	const removeIcon = document.createElement('i');
@@ -144,7 +185,7 @@ const rBtn = () => {
 const eBtn = () => {
 	const editBtn = document.createElement('button');
 	editBtn.classList.add('editBtn');
-	editBtn.classList.add('circleBtn');
+	editBtn.classList.add('square-btn');
 	editBtn.id = 'editBtn';
 
 	const editIcon = document.createElement('i');
@@ -157,7 +198,7 @@ const eBtn = () => {
 const oBtn = () => {
 	const okBtn = document.createElement('button');
 	okBtn.classList.add('okBtn');
-	okBtn.classList.add('circleBtn');
+	okBtn.classList.add('square-btn');
 	okBtn.id = 'okBtn';
 
 	const okIcon = document.createElement('i');
@@ -172,7 +213,7 @@ const clear = anyInput => {
 }
 
 const parseListItem = item => {
-  const text = item.querySelector('span')
+  const text = item.querySelector('span.inner-text')
 	const checkbox = item.querySelector('input[type="checkbox"]')
 	const dateText = item.querySelector('p.date-p')
 
@@ -203,6 +244,10 @@ const loadData = () => {
 }
 
 addButton.addEventListener('click', () => {
+	
+	if(!addInput.value.trim()) {
+		return false;
+	}
 
   const data = {
     text: addInput.value,
@@ -217,3 +262,39 @@ addButton.addEventListener('click', () => {
 })
 
 loadData()
+
+const getDate = () => {
+	var months=new Array(13);
+			months[1]="January";
+			months[2]="February";
+			months[3]="March";
+			months[4]="April";
+			months[5]="May";
+			months[6]="June";
+			months[7]="July";
+			months[8]="August";
+			months[9]="September";
+			months[10]="October";
+			months[11]="November";
+			months[12]="December";
+
+	var time=new Date();
+	var thismonth=months[time.getMonth() + 1];
+	var date=time.getDate();
+	var thisyear=time.getFullYear();
+	var day=time.getDay() + 1;
+
+	if (thisyear < 2000)
+	thisyear = thisyear + 1900;
+	if(day==1) DayofWeek = "Sunday";
+	if(day==2) DayofWeek = "Monday";
+	if(day==3) DayofWeek = "Tuesday";
+	if(day==4) DayofWeek = "Wednesday";
+	if(day==5) DayofWeek = "Thursday";
+	if(day==6) DayofWeek = "Friday";
+	if(day==7) DayofWeek = "Saturday";
+
+	nowDate.innerHTML = "<span>" + DayofWeek + " " + date + "</span>" + "<br>" + thismonth;
+}
+
+getDate()

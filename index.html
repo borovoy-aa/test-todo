@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="normalize.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <button id="addTodoBtn" class="add-task">
-        <i class="add-task__icon fas fa-plus"></i>
-    </button>
-    <input id="addTodo" type="text" class="new-task"/>
-    <select class="priorSelect" id="mainSelect">
-        <option value="no" >No</option>
-        <option value="low" >Low</option>
-        <option value="middle" >Middle</option>
-        <option value="high" >High</option>
-    </select>
-    <label for="mainSelect">Priority</label>
-    <input class="date" type="date" name="date" id="date">
-    <label for="anyDate">Date</label>
-    <ul id="todos"></ul>
-    
-    <script src="app.js"></script>
+	<div class="main-container">
+		<div class="main-wrapper">
+			<p id="nowDate" class="now-date"></p>
+			<div class="control-wrapper">
+				<button id="addTodoBtn" class="add-task square-btn">
+					<i class="add-task__icon fas fa-plus"></i>
+				</button>
+				<input id="addTodo" type="text" class="new-task"/>
+				<select class="priorSelect" id="mainSelect">
+					<option value="no" >No</option>
+					<option value="low" >Low</option>
+					<option value="middle" >Middle</option>
+					<option value="high" >High</option>
+				</select>
+				<label for="mainSelect">Priority</label>
+				<input class="date" type="date" name="date" id="date">
+				<label for="anyDate">Date</label>
+			</div>
+			<ul id="todos" class="main-list"></ul>
+		</div>
+	</div>
+	<script src="app.js"></script>
 </body>
 </html>
