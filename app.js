@@ -27,7 +27,7 @@ const dateP = date => {
 	const dateP = document.createElement('p');
 	dateP.classList.add('date-p');
 	dateP.innerText = date;
-
+	
 	return dateP;
 }
 

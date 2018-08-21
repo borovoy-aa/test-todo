@@ -17,14 +17,14 @@
 	margin-top: 20px;
 	border-radius: 5px;
 	padding: 30px;
-	max-width: 695px;
+	width: 750px;
 }
 
 .control-wrapper {
 	width: auto;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -52,7 +52,6 @@
 }
 
 .date {
-	margin-left: 75px;
 	padding: 5px;
 	font-size: 14px;
 	border-radius: 5px;

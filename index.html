@@ -14,19 +14,28 @@
 		<div class="main-wrapper">
 			<p id="nowDate" class="now-date"></p>
 			<div class="control-wrapper">
+				
+
+				<div class="priorityWrap">
+					<select class="priorSelect" id="mainSelect">
+						<option value="no" >No</option>
+						<option value="low" >Low</option>
+						<option value="middle" >Middle</option>
+						<option value="high" >High</option>
+					</select>
+					<label for="mainSelect">Priority</label>
+				</div>
+				
+				<div class="dateWrap">
+					<input class="date" type="date" name="date" id="date">
+					<label for="anyDate">Date</label>
+				</div>
+				
+				<input id="addTodo" type="text" class="new-task"/>
+
 				<button id="addTodoBtn" class="add-task square-btn">
 					<i class="add-task__icon fas fa-plus"></i>
 				</button>
-				<input id="addTodo" type="text" class="new-task"/>
-				<select class="priorSelect" id="mainSelect">
-					<option value="no" >No</option>
-					<option value="low" >Low</option>
-					<option value="middle" >Middle</option>
-					<option value="high" >High</option>
-				</select>
-				<label for="mainSelect">Priority</label>
-				<input class="date" type="date" name="date" id="date">
-				<label for="anyDate">Date</label>
 			</div>
 			<ul id="todos" class="main-list"></ul>
 		</div>
