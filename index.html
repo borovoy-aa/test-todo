@@ -7,6 +7,7 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="normalize.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://rawgit.com/wwilsman/Datepicker.js/master/dist/css/datepicker.material.css">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,12 +24,12 @@
 						<option value="middle" >Middle</option>
 						<option value="high" >High</option>
 					</select>
-					<label for="mainSelect">Priority</label>
+					<label for="mainSelect">Choose Priority</label>
 				</div>
 				
 				<div class="dateWrap">
-					<input class="date" type="date" name="date" id="date">
-					<label for="anyDate">Date</label>
+					<input type="text" class="date" id="datepicker">
+					<label for="anyDate">Choose Date</label>
 				</div>
 				
 				<input id="addTodo" type="text" class="new-task"/>
@@ -40,6 +41,7 @@
 			<ul id="todos" class="main-list"></ul>
 		</div>
 	</div>
+	<script src="https://rawgit.com/wwilsman/Datepicker.js/master/dist/datepicker.js"></script>
 	<script src="app.js"></script>
 </body>
 </html>

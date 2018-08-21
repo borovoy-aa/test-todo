@@ -2,8 +2,9 @@ const addInput = document.getElementById('addTodo');
 const addButton = document.getElementById('addTodoBtn');
 const todoList = document.getElementById('todos');
 const mainSelect = document.getElementById("mainSelect");
-const inputDate = document.getElementById('date');
+const inputDate = document.getElementById('datepicker');
 const nowDate = document.getElementById('nowDate')
+const datepicker = new Datepicker('#datepicker');
 
 
 const getListItems = () => document.querySelectorAll('#todos > li')
